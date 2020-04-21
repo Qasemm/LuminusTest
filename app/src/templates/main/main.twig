@@ -1,0 +1,18 @@
+{% extends "base/base.twig" %}
+
+{% block content %}
+    <h1>My Dragons</h1>
+    <a href="/create">New Dragon</a>
+    {% if dragons|length == 0 %}
+        <h2>No dragons exist! Press New Dragon above to add one.</h2>
+    {% endif %}
+    {% for dragon in dragons %}
+        <div class="item">
+            <h3>{{dragon.name}}</h3>
+            <div>{{dragon.age}} years</div>
+            <div>Favourite foods: {{dragon.foods}}</div>
+            <div>Location: {{dragon.location}}</div>
+            <a href="/edit/{{dragon.id}}">Edit</a>
+        </div>
+    {% endfor %}
+{% endblock %}

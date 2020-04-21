@@ -1,0 +1,48 @@
+{% extends "base/base.twig" %}
+
+{% block css %}
+    <style>
+        div {
+            margin: 10px;
+        }
+
+        input, select {
+            display: block;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .submit {
+            text-align: center;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <form method="POST" action="{{isCreate ? '/insert' : '/update/' ~ dragon.id}}">
+        <div>
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" placeholder="Name" value="{{dragon.name}}" required />
+        </div>
+        <div>
+            <label for="age">Age</label>
+            <input id="age" name="age" type="number" placeholder="Age" value="{{dragon.age}}" required />
+        </div>
+
+        <div>
+            <label for="foods">Favourite foods</label>
+            <input id="foods" name="foods" type="text" placeholder="Favourite foods" value="{{dragon.foods}}" required />
+        </div>
+        <div>
+            <label for="location">Location</label>
+            <select id="location" name="location">
+                {% for location in locations %}
+                    <option value="{{location.id}}" {% if location.id == dragon.location_id %}selected{% endif %}>{{location.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="submit">
+            <button>Save</button>
+        </div>
+    </form>
+{% endblock %}
